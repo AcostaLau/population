@@ -1,28 +1,22 @@
-import csv
+import read
+import charts
+import country_filter
 
 
-def read_file(read):
-    population = []
-    # leo el archivo
-    with open(read, mode='r') as file:
-        # guardo en la variable el contenido del archivo utilizando el modulo csv
-        database_reader = csv.reader(file, delimiter=',')
+def run():
+    # obtengo data, la cual viene desde el modulo read
+    data = read.read_file('./database.csv')
 
-        # hago que itere sobre la primera linea del archivo, contiene las claves
-        main_information = next(database_reader)
-        # recorro la informacion del archivo
-        for row in database_reader:
-            # el zip lo utilizo para juntar dos listas, en este caso las claves (main_information) y valores (row)
-            file_information = zip(main_information, row)
+    pais = input('Escriba el pais que quiera saber ==> ')
 
-            # genero el diccionario
-            country_dic = {key: value for key, value in file_information}
+    resultado = country_filter.filter(data, pais)
 
-            # lo coloco dentro de la lista
-            population.append(country_dic)
-    return population
+    # si encontro algo en resultado se ejcuta
+    if len(resultado) > 0:
+        keys, values = country_filter.value_key(resultado)
+        chart = charts.generate_chart(keys, values)
+    else:
+        print('No hemos encontrado el pais deseado')
 
 
-if __name__ == '__main__':
-    data = read_file('./database.csv')
-    print(data)
+run()
