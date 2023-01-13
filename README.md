@@ -9,7 +9,7 @@ Este proyecto se enfoca en el análisis de datos de población de diferentes pa�
 ## Instalación
 1. Clonar este repositorio
 
-- git clone https://github.com/<username>/population-analysis.git
+- git clone https://github.com/AcostaLau/population.git
 
 
 ## Uso
